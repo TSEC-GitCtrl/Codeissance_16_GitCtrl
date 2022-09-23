@@ -1,14 +1,48 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import ADashboard from "./components/Admin-Dashboard/Admin-Dashboard";
+import TDashboard from "./components/Teacher-Dashboard/Teacher-Dashboard";
+import SDashboard from "./components/Student-Dashboard/Student-Dashboard";
+import Login from "./components/Login/login";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const Admin_login = () => {
+  return <ADashboard />;
+};
+
+const Teacher_login = () => {
+  return <TDashboard />;
+};
+
+const Student_login = () => {
+  return <SDashboard />;
+};
+
+const OptionalRendering = (props) => {
+  const role = props.role;
+  if (role == "Admin") {
+    return <ADashboard />;
+  }
+  if (role == "Teacher") {
+    return <TDashboard />;
+  }
+  if (role == "Student") {
+    return <SDashboard />;
+  }
+};
+
+ReactDOM.render(
+  <BrowserRouter>
+    <React.StrictMode>
+      {/* <OptionalRendering role={"Admin"}></OptionalRendering> */}
+      <App />
+      {/* <Login /> */}
+    </React.StrictMode>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
