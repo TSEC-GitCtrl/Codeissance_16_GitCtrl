@@ -12,28 +12,26 @@ function LandingPage() {
       <Navbar />
       <section className="content-section" id="content-section">
         <div className="left-side-content">
-          <h3>ABOUT Grievance Redressal System</h3>
+          <h3>ABOUT Student Management System</h3>
           <p className="main-content">
-            Centralised Public Grievance Redress and Monitoring System (CPGRAMS)
-            is an online platform available to the citizens 24x7 to lodge their
-            grievances to the public authorities on any subject related to
-            service delivery. It is a single portal connected to all the
-            Ministries/Departments of Government of India and States. Every
-            Ministry and States have role-based access to this system. CPGRAMS
-            is also accessible to the citizens through standalone mobile
-            application downloadable through Google Play store and mobile
-            application integrated with UMANG.
+            lIf you have a variable to send, and not a string as in the example
+            above, you just put the variable name insid If you have a variable
+            to send, and not a string as in the example above, you just put the
+            variable name insid If you have a variable to send, and not a string
+            as in the example above, you just put the variable name insid If you
+            have a variable to send, and not a string as in the example above,
+            you just put the variable name insid If you have a variable to send,
+            and not a string as in the example above, you just put the variable
+            name insid If you have a variable to send, and not a string as in
+            the example above, you just put the variable name insid If you have
+            a variable to send, and notid If you have a variable to send, and
+            not a string as in the exam
           </p>
           <p className="main-content">
-            The status of the grievance filed in CPGRAMS can be tracked with the
-            unique registration ID provided at the time of registration of the
-            complainant. CPGRAMS also provides appeal facility to the citizens
-            if they are not satisfied with the resolution by the Grievance
-            Officer. After closure of grievance if the complainant is not
-            satisfied with the resolution, he/she can provide feedback. If the
-            rating is ‘Poor’ the option to file an appeal is enabled. The status
-            of the Appeal can also be tracked by the petitioner with the
-            grievance registration number.
+            If you have a variable to send, and not a string as in the example
+            above, you just put the variaIf you have a variable to send, and not
+            a string as in the example above, you just put the variable name
+            insid
           </p>
           {/* <div>
             <span className="span">

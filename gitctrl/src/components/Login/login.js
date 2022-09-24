@@ -1,123 +1,179 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import {
+  Typography,
+  TextField,
+  Box,
+  Button,
+  Grid,
+  Avatar,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Card,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Navbar from "../navbar/Navbar";
+import ADashboard from "../Admin-Dashboard/Admin-Dashboard";
+import TDashboard from "../Teacher-Dashboard/Teacher-Dashboard";
+import SDashboard from "../Student-Dashboard/Student-Dashboard";
+import "./login.css";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
+function showPass() {
+  var x = document.getElementById("pass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
 }
 
-const theme = createTheme();
+// const trial = () => {
+//   const role = "Admin";
+//   if (role == "Admin") {
+//     document.getElementById("#signin").
+//   }
+// }
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+const OptionalRendering = () => {
+  const role = "Admin";
+  if (role == "Admin") {
+    return (
+      <div>
+        <ADashboard />
+      </div>
+    );
+  } else if (role == "Teacher") {
+    return (
+      <div>
+        <TDashboard />
+      </div>
+    );
+  } else if (role == "Student") {
+    return (
+      <div>
+        <SDashboard />
+      </div>
+    );
+  } else {
+    return <div>Error 404! User not found!</div>;
+  }
+};
+
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const Navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const body = {
+      email,
+      password,
+    };
+
+    if (!email || !password) {
+      alert("fill the proper form");
+    } else {
+      console.log(body);
+    }
+
+    const result = await fetch(process.env.REACT_APP_API_URL + "/auth/login", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
+    const data = await result.json();
+    console.log(data);
+    localStorage.setItem("Token", data.data);
+    Navigate("/vprofile", { replace: true });
   };
 
   return (
-    <div className="container">
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Log in
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
+    <>
+      <Navbar />
+      <Box
+        sx={{
+          marginTop: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Card sx={{ maxWidth: 400 }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate m={3}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Email Address"
+              size="small"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              size="small"
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={showPassword}
+                  onChange={() => setShowPassword(!showPassword)}
+                  color="primary"
+                />
+              }
+              label="Show password"
+            />
+            <a href="/dashboard" id="signin">
+              Login
+            </a>
+            {/* <Link
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              to="/dashboard"
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={<OptionalRendering />}
-              >
-                Sign In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+              Login
+            </Link> */}
+
+            {/* <Link to="/dashboard/TeacherDashboard"></Link>
+            <Link to="/dashboard/StudentDashboard"></Link> */}
+            {/* <Outlet /> */}
+            <Grid container>
+              <Grid item xs>
+                <Link href="/step" variant="body2">
+                  Forgot password?
+                </Link>
               </Grid>
-            </Box>
+              {/* <Grid item>
+                <Link href="/" variant="body2">
+                  Don't have an account? Sign Up
+                </Link>
+              </Grid> */}
+            </Grid>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
-        </Container>
-      </ThemeProvider>
-    </div>
+        </Card>
+      </Box>
+    </>
   );
 }

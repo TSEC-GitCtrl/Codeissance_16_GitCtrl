@@ -43,7 +43,7 @@ const Navbar = () => {
           <ul className="social-media-desktop">
             <li>
               <div className="logbtn">
-                <Link to="/login">Log_in</Link>
+                <Link to="/login">Login</Link>
               </div>
             </li>
           </ul>

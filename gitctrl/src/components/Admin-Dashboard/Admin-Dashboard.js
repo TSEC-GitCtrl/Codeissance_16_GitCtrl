@@ -191,19 +191,19 @@ export function DashboardContent() {
                   <div className="mini-box first-box">
                     <Link to="/admin">
                       <img src="https://pgportal.gov.in/Images/iconHome/register.png" />
-                      <p className="third-section-p">Admin</p>
+                      <p className="third-section-p">Check teachers</p>
                     </Link>
                   </div>
                   <div className="mini-box second-box">
                     <Link to="/teachers">
                       <img src="https://pgportal.gov.in/Images/iconHome/status.png" />
-                      <p className="third-section-p">Teachers</p>
+                      <p className="third-section-p">Check students</p>
                     </Link>
                   </div>
                   <div className="mini-box third-box">
                     <Link to="/students">
                       <img src="https://pgportal.gov.in/Images/iconHome/contact.png" />
-                      <p className="third-section-p">Students</p>
+                      <p className="third-section-p">Assign credentials</p>
                     </Link>
                   </div>
                 </div>
